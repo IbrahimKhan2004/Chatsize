@@ -82,7 +82,7 @@ def run_task(gelen: Message, duzenlenecek: Message):
         #
         txt = ""
         total = last_msg_id + 1
-        current = 1
+        current = 28654
         empty = nomessage = nomedia = mediawosize = total_calculated_size = 0
         start_time = time.time()
         while current < total:
