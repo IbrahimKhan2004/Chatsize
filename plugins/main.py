@@ -82,7 +82,7 @@ def run_task(gelen: Message, duzenlenecek: Message):
         #
         txt = ""
         total = last_msg_id + 1
-        current = 1
+        current = 24999
         empty = nomessage = nomedia = mediawosize = total_calculated_size = 0
         start_time = time.time()
         while current < total:
@@ -113,11 +113,11 @@ def run_task(gelen: Message, duzenlenecek: Message):
             message:Message = None
             try:
                 message = duzenlenecek._client.get_messages(chat_id=chat_id, message_ids=current, replies=0)
-                message.copy(-1001730143644)
+                message.copy(-1001733896979)
             except FloodWait as e:
                 time.sleep(e.value)
                 message = duzenlenecek._client.get_messages(chat_id=chat_id, message_ids=current, replies=0)
-                message.copy(-1001730143644)
+                message.copy(-1001733896979)
             except Exception as e:
                 LOGGER.exception(e)
                 continue
