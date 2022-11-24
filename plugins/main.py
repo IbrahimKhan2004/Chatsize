@@ -113,11 +113,11 @@ def run_task(gelen: Message, duzenlenecek: Message):
             message:Message = None
             try:
                 message = duzenlenecek._client.get_messages(chat_id=chat_id, message_ids=current, replies=0)
-                message.copy(-1001694110871)
+                message.copy(-1001807633750)
             except FloodWait as e:
                 time.sleep(e.value)
                 message = duzenlenecek._client.get_messages(chat_id=chat_id, message_ids=current, replies=0)
-                message.copy(-1001694110871)
+                message.copy(-1001807633750)
             except Exception as e:
                 LOGGER.exception(e)
                 continue
