@@ -10,7 +10,7 @@ class Config:
     AUTH_IDS = [int(x) for x in os.environ.get("AUTH_IDS", "0").split()] # if open to everyone give 0
     OWNER_ID = int(os.environ.get('OWNER_ID', 0)) # give your owner id # if given 0 shell will not works
     FORCE_SUBSCRIBE_CHANNEL = os.environ.get('FORCE_SUBSCRIBE_CHANNEL','') # force subscribe channel link.
-    CHANNEL_OR_CONTACT = os.environ.get('CHANNEL_OR_CONTACT', "HuzunluArtemis") # give your public channel or contact username
+    CHANNEL_OR_CONTACT = os.environ.get('CHANNEL_OR_CONTACT', "xTnmgbR6rjgCDF7iPoFfiN8YfBsez9Lv") # give your public channel or contact username
 
     HEROKU_API_KEY = os.environ.get('HEROKU_API_KEY', "")
     HEROKU_APP_NAME = os.environ.get('HEROKU_APP_NAME', "")
