@@ -42,7 +42,7 @@ def run_task(gelen: Message, duzenlenecek: Message):
             a=match.group(6)
             b=match.group(7)
             if a==b:
-                if b.isnumeric():
+                if b is not None:
                     f_msg_id=int(match.group(7))
                     
                 else:
