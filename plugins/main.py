@@ -42,7 +42,11 @@ def run_task(gelen: Message, duzenlenecek: Message):
             a=match.group(6)
             b=match.group(7)
             if a==b:
-                f_msg_id=1
+                if b.isnumeric():
+                    f_msg_id=int(match.group(7))
+                    
+                else:
+                    f_msg_id=1
             else:
                 f_msg_id = int(match.group(7))
                 t_chatid = int(match.group(6))
