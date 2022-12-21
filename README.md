@@ -32,13 +32,13 @@ log - send bot logs ❗ admin only
 
 forworder function(with chat size)
 
-   last-Msg-url-of-source-chat_target-chat-id_first-msg-id(default1 )
+   last-Msg-url-of-source-chat_target-chat-id_first-msg-id(default1)
    
-      ex-```https://t.me/c/180763750/915_-100110678269_800```
+          https://t.me/c/180763750/915_-100110678269_800 
       
    first messege id maybe omitted
    
-      ex-```https://t.me/c/180763370/200_-100181067869```
+          https://t.me/c/180763370/200_-100181067869
       
       
 chat size calculater
