@@ -24,6 +24,7 @@ f_msg_id = 0
 t_chatid = 0
 a=""
 b=""
+m=0
 def run_task(gelen: Message, duzenlenecek: Message):
     try:
         if gelen.text:
@@ -111,10 +112,11 @@ def run_task(gelen: Message, duzenlenecek: Message):
                         f"\n\n{infochat}\n\n[💜](https://huzunluartemis.github.io/ChatSizeBot/) **Process / İşlem:**" \
                         f"\n\nCalculated Total Size: `{humanbytes(total_calculated_size)}` (`{str(total_calculated_size)} bytes`)" \
                         f"\nProcessed Messages: `{current - f_msg_id}`" \
-                        f"\nTo Be Processed: `{total - current - f_msg_id}`" \
+                        f"\nTo Be Processed: `{total - current}`" \
                         f"\nDeleted Messages: `{empty}`" \
                         f"\nDamaged Messages: `{nomessage}`" \
                         f"\nNon-media Messages: `{nomedia}`" \
+                        f"\media Messages: `{m}`" \
                         f"\nNo Filesize Medias: `{mediawosize}`" \
                         f"\nPassed Time: `{TimeFormatter(time.time() - start_time)}`" \
                         f"\nElapsed Time: `{TimeFormatter((total - current) / hiz)}`" \
@@ -149,6 +151,7 @@ def run_task(gelen: Message, duzenlenecek: Message):
             for i in media_array:
                 if i is not None:
                     media = i
+                    m += 1
                     break
             if not media:
                 nomedia += 1
@@ -169,6 +172,7 @@ def run_task(gelen: Message, duzenlenecek: Message):
                 f"\nDeleted Messages: `{empty}`" \
                 f"\nDamaged Messages: `{nomessage}`" \
                 f"\nNon-media Messages: `{nomedia}`" \
+                f"\media Messages: `{m}`" \
                 f"\nNo Filesize Medias: `{mediawosize}`" \
                 f"\nPassed Time: `{TimeFormatter(time.time() - start_time)}`" \
                 f'\nBot Uptime: `{TimeFormatter(time.time() - botStartTime)}`'
