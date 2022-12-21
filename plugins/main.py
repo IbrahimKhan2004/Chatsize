@@ -24,7 +24,6 @@ f_msg_id = 0
 t_chatid = 0
 a=""
 b=""
-m=0
 def run_task(gelen: Message, duzenlenecek: Message):
     try:
         if gelen.text:
@@ -98,7 +97,7 @@ def run_task(gelen: Message, duzenlenecek: Message):
         txt = ""
         total = last_msg_id + 1
         current = f_msg_id
-        empty = nomessage = nomedia = mediawosize = total_calculated_size = 0
+        empty = nomessage = nomedia = mediawosize = total_calculated_size = m = 0
         start_time = time.time()
         while current < total:
             current = current + 1
