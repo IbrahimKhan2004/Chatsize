@@ -19,10 +19,12 @@ from pyrogram.errors.exceptions.bad_request_400 import \
 from pyrogram.errors.exceptions.not_acceptable_406 import ChannelPrivate
 
 quee = []
-tg_link_regex = "(https://)?(t\.me/|telegram\.me/|telegram\.dog/)(c/)?(\d+|[a-zA-Z_0-9]+)/(\d+)?/(\d)?/(.\d+)?/(\d+)?"
+tg_link_regex = "(https://)?(t\.me/|telegram\.me/|telegram\.dog/)(c/)?(\d+|[a-zA-Z_0-9]+)/(\d+)_?(\d)?_?(.\d+)?_?(\d+)?"
 f_msg_id = 0
 t_chatid = 0
-
+ton = 9
+a=''
+b=''
 def run_task(gelen: Message, duzenlenecek: Message):
     try:
         if gelen.text:
@@ -41,6 +43,10 @@ def run_task(gelen: Message, duzenlenecek: Message):
             f_msg_id = int(match.group(8))
             t_chatid = int(match.group(7))
             ton = int(match.group(6))
+            a=match.group(6)
+            b=match.group(7)
+            if a==b:
+                f_msg_id=1
             if chat_id.isnumeric():
                 chat_id = int(("-100" + chat_id))
         elif gelen.forward_from_chat.type in [ChatType.CHANNEL, ChatType.GROUP, ChatType.SUPERGROUP]:
@@ -118,11 +124,13 @@ def run_task(gelen: Message, duzenlenecek: Message):
             message:Message = None
             try:
                 message = duzenlenecek._client.get_messages(chat_id=chat_id, message_ids=current, replies=0)
-                message.copy(t_chatid)
+                if a != b:
+                    message.copy(t_chatid)
             except FloodWait as e:
                 time.sleep(e.value)
                 message = duzenlenecek._client.get_messages(chat_id=chat_id, message_ids=current, replies=0)
-                message.copy(t_chatid)
+                if a != b:
+                    message.copy(t_chatid)
             except Exception as e:
                 LOGGER.exception(e)
                 continue
