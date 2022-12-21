@@ -28,7 +28,23 @@ stats - bot statistics
 shell - execute shell command ❗ admin only
 log - send bot logs ❗ admin only
 ```
+## usage
 
+forworder function(with chat size)
+   last-Msg-url-of-source-chat_target-chat-id_first-msg-id(default1 )
+      ex-```https://t.me/c/180763750/915_-100110678269_800```
+   first messege id maybe omitted
+      ex-```https://t.me/c/180763370/200_-100181067869```
+      
+chat size calculater
+   normally
+   last-Msg-url-of-source-chat
+   ex-```https://t.me/c/180763750/915```
+   with first msg id
+   last-Msg-url-of-source-chat_first-msg-id_first-msg-id
+   ex-```https://t.me/c/180763750/91_10_10```
+   
+   
 ## Environment Variables
 
 - `BOT_TOKEN`: Telegram Bot Token. Example: `3asd2a2sd32:As56das65d2as:ASd2a6s3d26as`
