@@ -117,7 +117,7 @@ def run_task(gelen: Message, duzenlenecek: Message):
                         f"\nDeleted Messages: `{empty}`" \
                         f"\nDamaged Messages: `{nomessage}`" \
                         f"\nNon-media Messages: `{nomedia}`" \
-                        f"\media Messages: `{m}`" \
+                        f"\nmedia Messages: `{m}`" \
                         f"\nNo Filesize Medias: `{mediawosize}`" \
                         f"\nPassed Time: `{TimeFormatter(time.time() - start_time)}`" \
                         f"\nElapsed Time: `{TimeFormatter((total - current) / hiz)}`" \
@@ -173,7 +173,7 @@ def run_task(gelen: Message, duzenlenecek: Message):
                 f"\nDeleted Messages: `{empty}`" \
                 f"\nDamaged Messages: `{nomessage}`" \
                 f"\nNon-media Messages: `{nomedia}`" \
-                f"\media Messages: `{m}`" \
+                f"\nmedia Messages: `{m}`" \
                 f"\nNo Filesize Medias: `{mediawosize}`" \
                 f"\nPassed Time: `{TimeFormatter(time.time() - start_time)}`" \
                 f'\nBot Uptime: `{TimeFormatter(time.time() - botStartTime)}`'
