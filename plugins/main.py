@@ -110,8 +110,8 @@ def run_task(gelen: Message, duzenlenecek: Message):
                     txt = f"**% {'{:.3f}'.format(current * 100 / total)}** {get_progressbar(current, total)}" \
                         f"\n\n{infochat}\n\n[💜](https://huzunluartemis.github.io/ChatSizeBot/) **Process / İşlem:**" \
                         f"\n\nCalculated Total Size: `{humanbytes(total_calculated_size)}` (`{str(total_calculated_size)} bytes`)" \
-                        f"\nProcessed Messages: `{current}`" \
-                        f"\nTo Be Processed: `{total - current}`" \
+                        f"\nProcessed Messages: `{current - f_msg_id}`" \
+                        f"\nTo Be Processed: `{total - current - f_msg_id}`" \
                         f"\nDeleted Messages: `{empty}`" \
                         f"\nDamaged Messages: `{nomessage}`" \
                         f"\nNon-media Messages: `{nomedia}`" \
@@ -165,7 +165,7 @@ def run_task(gelen: Message, duzenlenecek: Message):
             txt = f"**% {'{:.3f}'.format(current * 100 / total)}** {get_progressbar(current, total)}" \
                 f"\n\n{infochat}\n\n[💜](https://huzunluartemis.github.io/ChatSizeBot/) **Process / İşlem:**" \
                 f"\n\nCalculated Total Size: `{humanbytes(total_calculated_size)}` (`{str(total_calculated_size)} bytes`)" \
-                f"\nProcessed Messages: `{current}`" \
+                f"\nProcessed Messages: `{current - f_msg_id}`" \
                 f"\nDeleted Messages: `{empty}`" \
                 f"\nDamaged Messages: `{nomessage}`" \
                 f"\nNon-media Messages: `{nomedia}`" \
