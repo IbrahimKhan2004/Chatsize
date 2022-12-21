@@ -42,13 +42,12 @@ def run_task(gelen: Message, duzenlenecek: Message):
             a=match.group(6)
             b=match.group(7)
             if a==b:
-                if b is not None:
+                if a is not None:
                     f_msg_id=int(match.group(7))
-                    
                 else:
                     f_msg_id=1
             else:
-                f_msg_id = 1
+                f_msg_id = int(match.group(7))
                 t_chatid = int(match.group(6))
             if chat_id.isnumeric():
                 chat_id = int(("-100" + chat_id))
