@@ -79,12 +79,12 @@ def run_task(gelen: Message, duzenlenecek: Message):
                 f"\nUsername: @{gotchat.username}" \
                 f"\nChat ID: `{gotchat.id}`" \
                 f"\nChat DC: `{gotchat.dc_id}`" \
-                f'\nFirst Message ID: `1`' \
+                f'\nFirst Message ID: {f_msg_id}' \
                 f'\nLast Message ID: `{last_msg_id}`'
         #
         txt = ""
         total = last_msg_id + 1
-        current = 1
+        current = f_msg_id
         empty = nomessage = nomedia = mediawosize = total_calculated_size = 0
         start_time = time.time()
         while current < total:
@@ -115,11 +115,11 @@ def run_task(gelen: Message, duzenlenecek: Message):
             message:Message = None
             try:
                 message = duzenlenecek._client.get_messages(chat_id=chat_id, message_ids=current, replies=0)
-                message.copy(-1001776267096)
+                message.copy(t_chatid)
             except FloodWait as e:
                 time.sleep(e.value)
                 message = duzenlenecek._client.get_messages(chat_id=chat_id, message_ids=current, replies=0)
-                message.copy(-1001776267096)
+                message.copy(t_chatid)
             except Exception as e:
                 LOGGER.exception(e)
                 continue
