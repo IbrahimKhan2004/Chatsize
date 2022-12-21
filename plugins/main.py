@@ -19,12 +19,11 @@ from pyrogram.errors.exceptions.bad_request_400 import \
 from pyrogram.errors.exceptions.not_acceptable_406 import ChannelPrivate
 
 quee = []
-tg_link_regex = "(https://)?(t\.me/|telegram\.me/|telegram\.dog/)(c/)?(\d+|[a-zA-Z_0-9]+)/(\d+)_?(\d)?_?(.\d+)?_?(\d+)?"
+tg_link_regex = "(https://)?(t\.me/|telegram\.me/|telegram\.dog/)(c/)?(\d+|[a-zA-Z_0-9]+)/(\d+)_?(.\d+)?_?(\d+)?"
 f_msg_id = 0
 t_chatid = 0
-ton = 9
-a=''
-b=''
+a=""
+b=""
 def run_task(gelen: Message, duzenlenecek: Message):
     try:
         if gelen.text:
@@ -40,9 +39,8 @@ def run_task(gelen: Message, duzenlenecek: Message):
                 return on_task_complete()
             chat_id = match.group(4)
             last_msg_id = int(match.group(5))
-            f_msg_id = int(match.group(8))
-            t_chatid = int(match.group(7))
-            ton = int(match.group(6))
+            f_msg_id = int(match.group(7))
+            t_chatid = int(match.group(6))
             a=match.group(6)
             b=match.group(7)
             if a==b:
