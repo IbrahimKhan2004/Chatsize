@@ -34,10 +34,10 @@ def run_task(gelen: Message, duzenlenecek: Message):
                     , disable_web_page_preview=True
                 )
                 return on_task_complete()
-            chat_id = match.group(4)
-            last_msg_id = int(match.group(5))
+            chat_id = match[4]
+            last_msg_id = int(match[5])
             if chat_id.isnumeric():
-                chat_id = int(("-100" + chat_id))
+                chat_id = int(f"-100{chat_id}")
         elif gelen.forward_from_chat.type in [ChatType.CHANNEL, ChatType.GROUP, ChatType.SUPERGROUP]:
             last_msg_id = gelen.forward_from_message_id
             chat_id = gelen.forward_from_chat.username or gelen.forward_from_chat.id
@@ -64,7 +64,7 @@ def run_task(gelen: Message, duzenlenecek: Message):
         except Exception as e:
             LOGGER.exception(e)
             duzenlenecek.edit_text(f'Errors - {e}', disable_web_page_preview=True)
-            
+
         if not gotchat:
             duzenlenecek.edit_text(
                 '🇹🇷 Beni kanalınıza/grubunuza yönetici olarak eklemelisiniz.' \
@@ -86,7 +86,7 @@ def run_task(gelen: Message, duzenlenecek: Message):
         empty = nomessage = nomedia = mediawosize = total_calculated_size = 0
         start_time = time.time()
         while current < total:
-            current = current + 1
+            current += 1
             # hız
             try: hiz = (current / ((time.time() - start_time).__round__())).__round__()
             except: hiz = 0
@@ -125,23 +125,17 @@ def run_task(gelen: Message, duzenlenecek: Message):
             elif message.empty:
                 empty = empty + 1
                 continue
-            #◙ find media
-            media = None
             media_array = [message.document, message.video, message.audio, message.photo, message.animation, message.voice, message.video_note]
-            for i in media_array:
-                if i is not None:
-                    media = i
-                    break
+            media = next((i for i in media_array if i is not None), None)
             if not media:
                 nomedia += 1
                 continue
             # find size
             if media.file_size:
                 total_calculated_size += int(media.file_size)
-                continue
             else:
                 mediawosize  += 1
-                continue
+            continue
         #
         if last_msg_id <= 30:
             txt = f"**% {'{:.3f}'.format(current * 100 / total)}** {get_progressbar(current, total)}" \

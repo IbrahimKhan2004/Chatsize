@@ -16,7 +16,7 @@ def humanbytes(size):
     while size > power:
         size /= power
         n += 1
-    return str(round(size, 2)) + " " + Dic_powerN[n] + 'B'
+    return f"{str(round(size, 2))} {Dic_powerN[n]}B"
 
 def TimeFormatter(milliseconds) -> str:
     milliseconds = int(milliseconds) * 1000
@@ -24,11 +24,13 @@ def TimeFormatter(milliseconds) -> str:
     minutes, seconds = divmod(seconds, 60)
     hours, minutes = divmod(minutes, 60)
     days, hours = divmod(hours, 24)
-    tmp = ((str(days) + "d, ") if days else "") + \
-        ((str(hours) + "h, ") if hours else "") + \
-        ((str(minutes) + "m, ") if minutes else "") + \
-        ((str(seconds) + "s, ") if seconds else "") + \
-        ((str(milliseconds) + "ms, ") if milliseconds else "")
+    tmp = (
+        (f"{str(days)}d, " if days else "")
+        + (f"{str(hours)}h, " if hours else "")
+        + (f"{str(minutes)}m, " if minutes else "")
+        + (f"{str(seconds)}s, " if seconds else "")
+        + (f"{str(milliseconds)}ms, " if milliseconds else "")
+    )
     return tmp[:-2]
 
 def get_progressbar(current=0, total=0):
@@ -36,8 +38,33 @@ def get_progressbar(current=0, total=0):
         return "[{0}]".format(Config.FINISHED_PROGRESS_STR * Config.PROGRESSBAR_LENGTH)
     try:
         return "[{0}{1}]".format(
-        ''.join([Config.FINISHED_PROGRESS_STR for i in range(math.floor(current * 100 / total / (100/Config.PROGRESSBAR_LENGTH)))]),
-        ''.join([Config.UN_FINISHED_PROGRESS_STR for i in range(Config.PROGRESSBAR_LENGTH - math.floor(current * 100 / total / (100/Config.PROGRESSBAR_LENGTH)))])
+            ''.join(
+                [
+                    Config.FINISHED_PROGRESS_STR
+                    for _ in range(
+                        math.floor(
+                            current
+                            * 100
+                            / total
+                            / (100 / Config.PROGRESSBAR_LENGTH)
+                        )
+                    )
+                ]
+            ),
+            ''.join(
+                [
+                    Config.UN_FINISHED_PROGRESS_STR
+                    for _ in range(
+                        Config.PROGRESSBAR_LENGTH
+                        - math.floor(
+                            current
+                            * 100
+                            / total
+                            / (100 / Config.PROGRESSBAR_LENGTH)
+                        )
+                    )
+                ]
+            ),
         )
     except Exception as e:
         LOGGER.exception(e)
