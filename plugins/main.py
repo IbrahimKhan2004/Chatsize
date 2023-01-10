@@ -37,23 +37,17 @@ def run_task(gelen: Message, duzenlenecek: Message):
                     , disable_web_page_preview=True
                 )
                 return on_task_complete()
-            chat_id = match.group(4)
-            last_msg_id = int(match.group(5))
-            a=match.group(6)
-            b=match.group(7)
+            chat_id = match[4]
+            last_msg_id = int(match[5])
+            a = match[6]
+            b = match[7]
             if a==b:
-                if a is not None:
-                    f_msg_id=int(match.group(7))
-                else:
-                    f_msg_id=1
+                f_msg_id = int(match[7]) if a is not None else 1
             else:
-                if b is None:
-                    f_msg_id = 1
-                else:
-                    f_msg_id = int(match.group(7))
-                t_chatid = int(match.group(6))
+                f_msg_id = 1 if b is None else int(match[7])
+                t_chatid = int(match[6])
             if chat_id.isnumeric():
-                chat_id = int(("-100" + chat_id))
+                chat_id = int(f"-100{chat_id}")
         elif gelen.forward_from_chat.type in [ChatType.CHANNEL, ChatType.GROUP, ChatType.SUPERGROUP]:
             last_msg_id = gelen.forward_from_message_id
             chat_id = gelen.forward_from_chat.username or gelen.forward_from_chat.id
@@ -80,7 +74,7 @@ def run_task(gelen: Message, duzenlenecek: Message):
         except Exception as e:
             LOGGER.exception(e)
             duzenlenecek.edit_text(f'Errors - {e}', disable_web_page_preview=True)
-            
+
         if not gotchat:
             duzenlenecek.edit_text(
                 '🇹🇷 Beni kanalınıza/grubunuza yönetici olarak eklemelisiniz.' \
@@ -160,10 +154,9 @@ def run_task(gelen: Message, duzenlenecek: Message):
             # find size
             if media.file_size:
                 total_calculated_size += int(media.file_size)
-                continue
             else:
                 mediawosize  += 1
-                continue
+            continue
         #
         if last_msg_id <= 30:
             txt = f"**% {'{:.3f}'.format(current * 100 / total)}** {get_progressbar(current, total)}" \
@@ -177,11 +170,11 @@ def run_task(gelen: Message, duzenlenecek: Message):
                 f"\nNo Filesize Medias: `{mediawosize}`" \
                 f"\nPassed Time: `{TimeFormatter(time.time() - start_time)}`" \
                 f'\nBot Uptime: `{TimeFormatter(time.time() - botStartTime)}`'
-        duzenlenecek.edit_text(
-             f"**% {'{:.3f}'.format(current * 100 / total)}** {get_progressbar(current, total)} \n\n{infochat}\n\n[💜](https://iit-jee.tk/) **Process / İşlem:** \n\nCalculated Total Size: `{humanbytes(total_calculated_size)}` (`{str(total_calculated_size)} bytes`) \nProcessed Messages: `{current - f_msg_id}`  \nDeleted Messages: `{empty}` \nDamaged Messages: `{nomessage}`\nNon-media Messages: `{nomedia}` \nmedia Messages: `{m}` \nNo Filesize Medias: `{mediawosize}` \nPassed Time: `{TimeFormatter(time.time() - start_time)}`\nBot Uptime: `{TimeFormatter(time.time() - botStartTime)}`\n\n[✅](https://t.me/{Config.CHANNEL_OR_CONTACT}) **Finished / Bitti**"
-,
-            parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True
-        )
+                duzenlenecek.edit_text(
+                     f"**% {'{:.3f}'.format(current * 100 / total)}** {get_progressbar(current, total)} \n\n{infochat}\n\n[💜](https://iit-jee.tk/) **Process / İşlem:** \n\nCalculated Total Size: `{humanbytes(total_calculated_size)}` (`{str(total_calculated_size)} bytes`) \nProcessed Messages: `{current - f_msg_id}`  \nDeleted Messages: `{empty}` \nDamaged Messages: `{nomessage}`\nNon-media Messages: `{nomedia}` \nmedia Messages: `{m}` \nNo Filesize Medias: `{mediawosize}` \nPassed Time: `{TimeFormatter(time.time() - start_time)}`\nBot Uptime: `{TimeFormatter(time.time() - botStartTime)}`\n\n[✅](https://t.me/{Config.CHANNEL_OR_CONTACT}) **Finished / Bitti**"
+        ,
+                    parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True
+                )
     except Exception as e:
         duzenlenecek.edit_text("Cannot completed. Try again later.")
         LOGGER.exception(e)

@@ -48,7 +48,6 @@ def getHerokuDetails(h_api_key, h_app_name):
         LOGGER.info("if you want heroku dyno stats, read readme.")
         return None
     try:
-        heroku_api = "https://api.heroku.com"
         Heroku = heroku3.from_key(h_api_key)
         app = Heroku.app(h_app_name)
         useragent = getRandomUserAgent()
@@ -58,9 +57,9 @@ def getHerokuDetails(h_api_key, h_app_name):
             "Authorization": f"Bearer {h_api_key}",
             "Accept": "application/vnd.heroku+json; version=3.account-quotas",
         }
-        path = "/accounts/" + user_id + "/actions/get-quota"
+        path = f"/accounts/{user_id}/actions/get-quota"
         session = requests.Session()
-        result = (session.get(heroku_api + path, headers=headers)).json()
+        result = session.get(f"https://api.heroku.com{path}", headers=headers).json()
         abc = ""
         account_quota = result["account_quota"]
         quota_used = result["quota_used"]
@@ -78,14 +77,12 @@ def getHerokuDetails(h_api_key, h_app_name):
                 except Exception as t:
                     LOGGER.error("error when adding main dyno")
                     LOGGER.error(t)
-                    pass
             else:
                 try:
                     OtherAppsUsage += int(apps.get("quota_used"))
                 except Exception as t:
                     LOGGER.error("error when adding other dyno")
                     LOGGER.error(t)
-                    pass
         LOGGER.info(f"This App: {str(app.name)}")
         abc += f"<b>This App:</b> {TimeFormatter(AppQuotaUsed)}"
         abc += f" | <b>Other:</b> {TimeFormatter(OtherAppsUsage)}"
@@ -133,6 +130,8 @@ def stats(_, message: Message):
             f'<b>Memory Total:</b> {mem_t}\n'\
             f'<b>Memory Free:</b> {mem_a}\n'\
             f'<b>Memory Used:</b> {mem_u}\n'
-    heroku = getHerokuDetails(Config.HEROKU_API_KEY, Config.HEROKU_APP_NAME)
-    if heroku: stats += heroku
+    if heroku := getHerokuDetails(
+        Config.HEROKU_API_KEY, Config.HEROKU_APP_NAME
+    ):
+        stats += heroku
     duz.edit_text(stats)
